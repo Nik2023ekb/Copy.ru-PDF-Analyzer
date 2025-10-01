@@ -4,6 +4,13 @@ from PySide6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit, QFileDialog, QLabel, QFrame
 )
 from PySide6.QtGui import QPixmap, QDragEnterEvent, QDropEvent
+import os
+import sys
+
+def resource_path(rel_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, rel_path)
+    return rel_path
 from PySide6.QtCore import Qt
 from PySide6.QtCore import Qt
 from .pdf_analyzer import analyze_pdf
@@ -36,7 +43,7 @@ class MainWindow(QWidget):
         # Логотип компактный
         logo = QLabel()
         logo.setAlignment(Qt.AlignCenter)
-        pixmap = QPixmap("src/assets/logo.png")
+        pixmap = QPixmap(resource_path("src/assets/logo.png"))
         if not pixmap.isNull():
             logo.setPixmap(pixmap.scaled(256, 256, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         else:
